@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\Dashboard;
+use App\Http\Controllers\Auth\ExpensesController;
 use App\Http\Controllers\Auth\Users;
 use App\Http\Controllers\Guest\Index;
 use Illuminate\Support\Facades\Route;
@@ -10,3 +11,5 @@ Route::post('/process-login', [Index::class, 'processLogin'])->name('process.log
 Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard');
 Route::get('/logout', [Index::class, 'logout'])->name('logout');
 Route::get('/users', [Users::class, 'index'])->name('users');
+Route::get('/expenses', [ExpensesController::class, 'index'])->name('expenses');
+Route::post('/add-expanses', [ExpensesController::class, 'create'])->name('expenses');

@@ -13,6 +13,11 @@
                     <i class="bi bi-person-circle" style="font-style: normal; letter-spacing: 2px;"> USERS </i>
                 </a>
             </li>
+            <li class="nav-item {{ Route::currentRouteName() == 'expenses' ? 'shadow-lg rounded bg-primary' : ''}}">
+                <a href="{{route('expenses')}}" class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'expenses' ? 'text-link-primary' : ''}}">
+                    <i class="bi bi-wallet-fill" style="font-style: normal; letter-spacing: 2px;"> EXPENSES </i>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{route('logout')}}" class="nav-link text-nowrap text-dark fw-bold">
                     <i class="bi bi-box-arrow-left" style="font-style: normal; letter-spacing: 2px;"> LOG OUT </i>
