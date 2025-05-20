@@ -4,17 +4,22 @@
     <nav>
         <ul class="nav d-flex flex-column" style="row-gap: 1em;">
             <li class="nav-item {{ Route::currentRouteName() == 'dashboard' ? 'shadow-lg rounded bg-primary' : ''}} ">
-                <a href="{{route('dashboard')}}" class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'dashboard' ? 'text-link-primary' : ''}}">
+                <a href="{{route('dashboard')}}"
+                    class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'dashboard' ? 'text-link-primary' : ''}}">
                     <i class="bi bi-speedometer" style="font-style: normal; letter-spacing: 2px;"> DASHBOARD </i>
                 </a>
             </li>
-            <li class="nav-item {{ Route::currentRouteName() == 'users' ? 'shadow-lg rounded bg-primary' : ''}}">
-                <a href="{{route('users')}}" class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'users' ? 'text-link-primary' : ''}}">
-                    <i class="bi bi-person-circle" style="font-style: normal; letter-spacing: 2px;"> USERS </i>
-                </a>
-            </li>
+            @if (auth()->user()->role == 'admin')
+                <li class="nav-item {{ Route::currentRouteName() == 'users' ? 'shadow-lg rounded bg-primary' : ''}}">
+                    <a href="{{route('users')}}"
+                        class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'users' ? 'text-link-primary' : ''}}">
+                        <i class="bi bi-person-circle" style="font-style: normal; letter-spacing: 2px;"> USERS </i>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item {{ Route::currentRouteName() == 'expenses' ? 'shadow-lg rounded bg-primary' : ''}}">
-                <a href="{{route('expenses')}}" class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'expenses' ? 'text-link-primary' : ''}}">
+                <a href="{{route('expenses')}}"
+                    class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'expenses' ? 'text-link-primary' : ''}}">
                     <i class="bi bi-wallet-fill" style="font-style: normal; letter-spacing: 2px;"> EXPENSES </i>
                 </a>
             </li>
@@ -36,14 +41,25 @@
     <div class="offcanvas-body">
         <nav>
             <ul class="nav d-flex flex-column" style="row-gap: 1em;">
-                <li class="nav-item {{ Route::currentRouteName() == 'dashboard' ? 'shadow-lg rounded bg-primary' : ''}} ">
-                    <a href="{{route('dashboard')}}" class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'dashboard' ? 'text-link-primary' : ''}}">
+                <li
+                    class="nav-item {{ Route::currentRouteName() == 'dashboard' ? 'shadow-lg rounded bg-primary' : ''}} ">
+                    <a href="{{route('dashboard')}}"
+                        class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'dashboard' ? 'text-link-primary' : ''}}">
                         <i class="bi bi-speedometer" style="font-style: normal; letter-spacing: 2px;"> DASHBOARD </i>
                     </a>
                 </li>
-                <li class="nav-item {{ Route::currentRouteName() == 'users' ? 'shadow-lg rounded bg-primary' : ''}}">
-                    <a href="{{route('users')}}" class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'users' ? 'text-link-primary' : ''}}">
-                        <i class="bi bi-person-circle" style="font-style: normal; letter-spacing: 2px;"> USERS </i>
+                @if (auth()->user()->role == 'admin')
+                    <li class="nav-item {{ Route::currentRouteName() == 'users' ? 'shadow-lg rounded bg-primary' : ''}}">
+                        <a href="{{route('users')}}"
+                            class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'users' ? 'text-link-primary' : ''}}">
+                            <i class="bi bi-person-circle" style="font-style: normal; letter-spacing: 2px;"> USERS </i>
+                        </a>
+                    </li>
+                @endif
+                <li class="nav-item {{ Route::currentRouteName() == 'expenses' ? 'shadow-lg rounded bg-primary' : ''}}">
+                    <a href="{{route('expenses')}}"
+                        class="nav-link text-nowrap text-dark fw-bold {{ Route::currentRouteName() == 'expenses' ? 'text-link-primary' : ''}}">
+                        <i class="bi bi-wallet-fill" style="font-style: normal; letter-spacing: 2px;"> EXPENSES </i>
                     </a>
                 </li>
                 <li class="nav-item">
