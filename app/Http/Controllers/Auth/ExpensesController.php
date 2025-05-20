@@ -27,6 +27,7 @@ class ExpensesController extends Controller
             // dd($request->all());
             // validate
             $request->validate([
+                'date' => 'required',
                 'amount' => ['required', 'numeric'],
                 'description' => ['required'],
                 'category' => 'required',
@@ -46,6 +47,7 @@ class ExpensesController extends Controller
             if ($path) {
                 // add record in the database
                 $status = Expense::create([
+                    'date' => $request->date,
                     'amount' => $request->amount,
                     'description' => $request->description,
                     'category' => $request->category,
@@ -94,6 +96,7 @@ class ExpensesController extends Controller
 
             $request->validate([
                 'id' => ['required'],
+                'date' => 'required',
                 'amount' => ['required', 'numeric'],
                 'description' => ['required'],
                 'category' => ['required'],
@@ -116,6 +119,7 @@ class ExpensesController extends Controller
 
             if ($path) {
                 $edit_status = $item->update([
+                    'date' => $request->date,
                     'amount' => $request->amount,
                     'description' => $request->description,
                     'category' => $request->category,

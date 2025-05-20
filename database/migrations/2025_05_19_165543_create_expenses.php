@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('category', ['Office Supply', 'Transportation', 'Honorarium', 'Sponsorship', 'Meals', 'Snacks'])->notNull();
             $table->string('event')->notNull();
             $table->longText('reciept')->notNull();
+            $table->dateTime('date')->nullable();
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@
                     <i class="bi bi-wallet"></i>
                     <h5 class="card-title m-0"> Expenses</h5>
                 </div>
-                @if (auth()->user()->role == 'treasurer')
+                @if (auth()->user()->role == 'user')
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add-expenses">
                         <i class="bi bi-plus" style="font-style: normal;"> Add</i>
                     </button>
@@ -27,7 +27,7 @@
                             <th>Category</th>
                             <th>Event</th>
                             <th>Reciept</th>
-                            @if (auth()->user()->role == 'treasurer')
+                            @if (auth()->user()->role == 'user')
                             <th>Action</th>
                             @endif
                         </thead>
@@ -37,7 +37,7 @@
                             @endphp
                             @forelse ($expenses as $item)
                             <tr>
-                                <td>{{$item->created_at->format('F j, Y')}}</td>
+                                <td>{{Carbon\Carbon::parse($item->date)->format('F j, Y h:i a')}}</td>
                                 <td>{{$item->amount}}</td>
                                 <td>{{$item->description}}</td>
                                 <td>{{$item->category}}</td>
@@ -46,7 +46,7 @@
                                     <img src="{{asset('storage/'. $item->reciept)}}" alt="img"
                                         style="width: 50px; height: 50px">
                                 </td>
-                                @if (auth()->user()->role == 'treasurer')
+                                @if (auth()->user()->role == 'user')
                                     <td class="text-center align-middle">
                                         <div class="dropdown">
                                             <i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown"
@@ -121,6 +121,13 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="hidden" name="id" value="{{$item->enc_id}}">
+
+                                                <div class="mb-2">
+                                                    <label for="date" class="fw-bold">Date</label>
+                                                    <input type="datetime-local" name="date" id="date" step="any"
+                                                        class="form-control" value="{{$item->date}}" required>
+                                                </div>
+
                                                 <div class="mb-2">
                                                     <label for="amount" class="fw-bold">Amount</label>
                                                     <input type="number" name="amount" id="amount" step="any"
@@ -203,6 +210,10 @@
                     {{-- form pang add ug new record sa bayad --}}
                     <form action="{{route('add.expenses')}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="mb-2">
+                            <label for="date" class="fw-bold">Date</label>
+                            <input type="datetime-local" name="date" id="date" step="any" class="form-control" required>
+                        </div>
                         <div class="mb-2">
                             <label for="amount" class="fw-bold">Amount</label>
                             <input type="number" name="amount" id="amount" step="any" class="form-control" required>

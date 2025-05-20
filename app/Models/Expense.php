@@ -13,13 +13,14 @@ class Expense extends Model
         'category',
         'event',
         'reciept',
+        'date'
     ];
 
     // get all expenses data
     public static function getAllData()
     {
         try {
-            $data = self::orderBy('created_at', 'desc')->paginate(15);
+            $data = self::orderBy('date', 'desc')->paginate(15);
             $data->getCollection()->transform(function ($item) {
                 $item->enc_id = Crypt::encrypt($item->id);
                 return $item;
